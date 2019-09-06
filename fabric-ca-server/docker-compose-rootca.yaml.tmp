@@ -1,0 +1,23 @@
+#
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+version: '2'
+networks:
+  ca-network:
+
+services:
+
+  ca-cli:
+     image: hyperledger/fabric-ca
+     container_name: ca-cli
+     environment:
+       - FABRIC_CA_SERVER_HOME=/etc/hyperledger/fabric-ca-server
+     working_dir: /etc/hyperledger/fabric-ca-server
+     volumes:
+       - './ca-cli:/etc/hyperledger/fabric-ca-server'
+     command: /bin/sh -c "while true; do echo hello world; sleep 10; done"
+     networks:
+       - ca-network
+
